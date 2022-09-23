@@ -1,34 +1,44 @@
 import './Products.css';
 
 import * as React from 'react';
-import { experimentalStyled as styled } from '@mui/material/styles';
+import {experimentalStyled as styled} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Unstable_Grid2';
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-}));
+import {connect} from "react-redux";
+import {setMoreProducts, setProducts} from "../../redux/ProductsReducer";
+import {useEffect, useState} from "react";
+import {shopServiceApi} from "../../service/shopServiceApi";
+import {Grid} from '@mui/material';
+import {useParams} from "react-router-dom";
 
+function Products({products, setProducts, setMoreProducts }: any) {
+    const [page, setPage] = useState(12)
+    const {id} = useParams()
 
-function Products() {
+    useEffect(() => {
+        (async () => {
+            const res = await shopServiceApi.getProduct(id, page).then((response: any) => setProducts(response));
+        })()
+    }, [id, page])
+
     return (
         <div className="Products">
-            <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                    {Array.from(Array(6)).map((_, index) => (
-                        <Grid xs={2} sm={4} md={4} key={index}>
-                            <Item>xs=2</Item>
-                        </Grid>
-                    ))}
-                </Grid>
-            </Box>
+            <Grid container rowSpacing={2} columnSpacing={2} xs={12}>
+                {products.data !== undefined && products.data.map((item: any) => <Grid key={item.id} item xs={3}>
+                        <img src={item.images} alt={item.id} className='photo'/>
+                    </Grid>
+                )}
+
+            </Grid>
+            <button onClick={() => setPage(page + 12)}></button>
         </div>
     );
 }
 
-export default Products;
+const productsData = (state: any) => ({
+    products: state.products.products,
+    categoriesId: state.sortBar.categories
+})
+
+export default connect(productsData, {setProducts, setMoreProducts})(Products);

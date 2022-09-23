@@ -18,12 +18,12 @@ const SortBarReducer = (state = initialState, action: AnyAction) => {
 
 export const setCategory = (categories: any) => ({type: SET_CATEGORY, categories})
 
-export const requestCategories = () => {
-    return async (dispatch: Dispatch<AnyAction>) => {
-        const res = await shopServiceApi.getCategories().then((response: any) => setCategory(response));
-        // console.log(res.categories.data.map((item:any) => item.name))
-    }
-}
+// export const requestCategories = () => {
+//     return async (dispatch: Dispatch<AnyAction>) => {
+//         const res = await shopServiceApi.getCategories().then((response: any) => setCategory(response));
+//         // console.log(res.categories.data.map((item:any) => item.name))
+//     }
+// }
 
 
 export default SortBarReducer

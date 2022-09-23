@@ -3,22 +3,20 @@ import React, {useEffect} from 'react';
 import './SortBar.css';
 import {shopServiceApi} from "../../service/shopServiceApi";
 import {setCategory} from "../../redux/SortBarReducer";
-import {AnyAction, Dispatch} from "redux";
 import {connect} from "react-redux";
+import {NavLink} from "react-router-dom";
 
 function SortBar({category, setCategory}:any) {
     useEffect(() => {
         (async ()=>{
             const res = await shopServiceApi.getCategories().then((response:any) => setCategory(response));
-            // console.log(res.categories.data.map((item:any) => item.name))
             })()
     }, [])
 
-    console.log(category)
     return (
         <div className="SortBar">
             <p>Переглянути все</p>
-            {category.data !== undefined && category.data.map((item:any) => <a key={item.id} href='#'>{item.name}</a>)}
+            {category.data !== undefined && category.data.map((item:any) => <NavLink key={item.id} to={`/сategory/${item.id}`}>{item.name}</NavLink>)}
         </div>
     );
 }
