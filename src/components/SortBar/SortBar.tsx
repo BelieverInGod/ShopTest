@@ -1,22 +1,31 @@
-import React from 'react';
-import shopServiceApi from '../../service/shopServiceApi'
+import React, {useEffect} from 'react';
 
 import './SortBar.css';
+import {shopServiceApi} from "../../service/shopServiceApi";
+import {setCategory} from "../../redux/SortBarReducer";
+import {AnyAction, Dispatch} from "redux";
+import {connect} from "react-redux";
 
-function SortBar() {
+function SortBar({category, setCategory}:any) {
+    useEffect(() => {
+        (async ()=>{
+            const res = await shopServiceApi.getCategories().then((response:any) => setCategory(response));
+            // console.log(res.categories.data.map((item:any) => item.name))
+            })()
+    }, [])
+
+    console.log(category)
     return (
         <div className="SortBar">
             <p>Переглянути все</p>
-            <a href='#'>Sale</a>
-            <a href='#'>Брюки</a>
-            <a href='#'>Джинси</a>
-            <a href='#'>Сукні</a>
-            <a href='#'>Футболки</a>
-            <a href='#'>Топи Світшоти</a>
-            <a href='#'>Верхній Одяг</a>
-            <button onClick={() => shopServiceApi.getCategories()}></button>
+            {category.data !== undefined && category.data.map((item:any) => <a key={item.id} href='#'>{item.name}</a>)}
         </div>
     );
 }
 
-export default SortBar;
+const categoriesData = (state:any) => ({
+  category: state.sortBar.categories
+})
+
+export default connect(categoriesData, {setCategory}) (SortBar);
+

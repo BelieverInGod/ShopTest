@@ -1,4 +1,4 @@
-export namespace shopServiceTypes = {
+export namespace shopServiceTypes {
     export interface IgetCategories {
         
     }
