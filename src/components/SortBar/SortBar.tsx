@@ -1,4 +1,5 @@
 import React from 'react';
+import shopServiceApi from '../../service/shopServiceApi'
 
 import './SortBar.css';
 
@@ -13,6 +14,7 @@ function SortBar() {
             <a href='#'>Футболки</a>
             <a href='#'>Топи Світшоти</a>
             <a href='#'>Верхній Одяг</a>
+            <button onClick={() => shopServiceApi.getCategories()}></button>
         </div>
     );
 }

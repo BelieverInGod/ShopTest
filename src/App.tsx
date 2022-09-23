@@ -10,7 +10,10 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <SortBar />
+      <div className='mainContent'>
+        <SortBar />
+        <Products />
+      </div>
       <Footer />
     </div>
   );
