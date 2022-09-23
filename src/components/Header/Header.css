@@ -1,0 +1,9 @@
+.Header {
+  display: flex;
+  width: 100%;
+  background: white;
+}
+
+.logo {
+  margin: 50px;
+}

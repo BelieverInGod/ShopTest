@@ -1,0 +1,15 @@
+.SortBar {
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  background: white;
+}
+
+.SortBar p {
+  font-size: 18px;
+}
+
+.SortBar a {
+  padding: 5px;
+}
