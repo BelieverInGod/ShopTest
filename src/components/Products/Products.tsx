@@ -6,16 +6,16 @@ import lessPostIcon from '../../assets/image/lessPost.png'
 
 import * as React from 'react';
 import {connect} from "react-redux";
-import {setMoreProducts, setProducts} from "../../redux/ProductsReducer";
+import {setLike, setMoreProducts, setProducts} from "../../redux/ProductsReducer";
 import {useEffect, useState} from "react";
 import {shopServiceApi} from "../../service/shopServiceApi";
 import {Grid} from '@mui/material';
 import {useParams} from "react-router-dom";
 
 
-function Products({products, setProducts, setMoreProducts}: any) {
+function Products({products, setProducts, setMoreProducts, like , setLike}: any) {
     const [page, setPage] = useState(12)
-    const [visiblePost, setvisiblePost] = useState(3)
+    const [visiblePost, setVisiblePost] = useState(3)
     const {id} = useParams()
 
     useEffect(() => {
@@ -24,11 +24,14 @@ function Products({products, setProducts, setMoreProducts}: any) {
         })()
     }, [id, page])
 
+
     return (
         <div className="Products">
             <div className={'visiblePost'}>
-                <img className={'lessPostIcon'} src={lessPostIcon} alt={lessPostIcon} onClick={() => setvisiblePost(6)}/>
-                <img className={'morePostIcon'} src={morePostIcon} alt={morePostIcon} onClick={() => setvisiblePost(3)}/>
+                <img className={'lessPostIcon'} src={lessPostIcon} alt={lessPostIcon}
+                     onClick={() => setVisiblePost(6)}/>
+                <img className={'morePostIcon'} src={morePostIcon} alt={morePostIcon}
+                     onClick={() => setVisiblePost(3)}/>
             </div>
             <Grid container rowSpacing={2} columnSpacing={2} xs={12}>
                 {products.data !== undefined && products.data.map((item: any) => <Grid key={item.id} item
@@ -41,8 +44,11 @@ function Products({products, setProducts, setMoreProducts}: any) {
                                     <p>{item.price} UAH</p>
                                 </div>
                                 <div>
-                                    <img src={likeIcon} alt={'likeIcon'} className='likeIcon'/>
-                                    <img src={redLike} alt={'redLike'} className='redLike'/>
+                                    {
+                                        like ?
+                                            <img src={likeIcon} alt={'likeIcon'} onClick={() => setLike(!like)}/> :
+                                            <img src={redLike} alt={'redLike'} onClick={()=> setLike(!like)} />
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -57,7 +63,8 @@ function Products({products, setProducts, setMoreProducts}: any) {
 
 const productsData = (state: any) => ({
     products: state.products.products,
-    categoriesId: state.sortBar.categories
+    like: state.products.like,
+    categoriesId: state.sortBar.categories,
 })
 
-export default connect(productsData, {setProducts, setMoreProducts})(Products);
+export default connect(productsData, {setProducts, setMoreProducts, setLike})(Products);

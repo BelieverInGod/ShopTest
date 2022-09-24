@@ -1,28 +1,29 @@
-import {AnyAction, Dispatch} from "redux";
-import {shopServiceApi} from "../service/shopServiceApi";
+import {AnyAction} from "redux";
 
 const SET_PRODUCTS = 'SET_PRODUCTS';
 const SET_MORE_PRODUCT = 'SET_MORE_PRODUCT';
+const SET_LIKE = 'SET_LIKE';
 
 const initialState = {
-    products: [],
+    products: [
+        {like: true}
+    ],
 }
 
 const ProductsReducer = (state = initialState, action: AnyAction) => {
     switch (action.type) {
         case SET_PRODUCTS:
             return {...state, products: action.products}
-        default:
-            return state
-    }
-    switch (action.type) {
         case SET_MORE_PRODUCT:
             return {...state, products: [...state.products, action.products]}
+        case SET_LIKE:
+            return {...state, like: action.like}
         default:
             return state
     }
 }
 
+export const setLike = (like: any) => ({type: SET_LIKE, like})
 export const setProducts = (products: any) => ({type: SET_PRODUCTS, products})
 export const setMoreProducts = (products: any) => ({type: SET_MORE_PRODUCT, products})
 
