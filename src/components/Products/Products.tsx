@@ -27,8 +27,8 @@ function Products({products, setProducts, setMoreProducts}: any) {
     return (
         <div className="Products">
             <div className={'visiblePost'}>
-                <img className={'lessPostIcon'} src={lessPostIcon} alt={lessPostIcon} onClick={() => setvisiblePost(3)}/>
-                <img className={'morePostIcon'} src={morePostIcon} alt={morePostIcon} onClick={() => setvisiblePost(6)}/>
+                <img className={'lessPostIcon'} src={lessPostIcon} alt={lessPostIcon} onClick={() => setvisiblePost(6)}/>
+                <img className={'morePostIcon'} src={morePostIcon} alt={morePostIcon} onClick={() => setvisiblePost(3)}/>
             </div>
             <Grid container rowSpacing={2} columnSpacing={2} xs={12}>
                 {products.data !== undefined && products.data.map((item: any) => <Grid key={item.id} item
