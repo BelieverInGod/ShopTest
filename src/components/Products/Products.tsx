@@ -6,7 +6,7 @@ import lessPostIcon from '../../assets/image/lessPost.png'
 
 import * as React from 'react';
 import {connect} from "react-redux";
-import {setLike, setMoreProducts, setProducts} from "../../redux/ProductsReducer";
+import {setLike, setMoreProducts, setProducts, showMore} from "../../redux/ProductsReducer";
 import {useEffect, useState} from "react";
 import {shopServiceApi} from "../../service/shopServiceApi";
 import {Grid} from '@mui/material';
@@ -15,7 +15,7 @@ import {NavLink} from "react-router-dom";
 
 
 
-function Products({products, setProducts, setMoreProducts, setLike}: any) {
+function Products({products, setProducts, showMore, setLike}: any) {
     const [page, setPage] = useState(12)
     const [visiblePost, setVisiblePost] = useState(3)
     const {id} = useParams()
@@ -29,22 +29,24 @@ function Products({products, setProducts, setMoreProducts, setLike}: any) {
                 setProducts(response.data)
             });
         })()
-    }, [id, page])
+    }, [id])
 
-    console.log(products)
+    const addMoreProducts = (id: string | undefined, page: number) => {
+        showMore(id, page).then(() => setPage(page + 12))
+    }
 
     return (
         <div className="Products">
             <div className={'visiblePost'}>
             <NavLink
                     className={({isActive}) => isActive ? 'active' : ''} key={'lessPost'}
-                    to={`/сategory/${id}/lessPost`}>
+                    to={`/сategory/${id}/Post`}>
                       <img className={'lessPostIcon'} src={lessPostIcon} alt={lessPostIcon}
                      onClick={() => setVisiblePost(6)}/>
                 </NavLink>
                 <NavLink
                     className={({isActive}) => isActive ? 'active' : ''} key={'morePost'}
-                    to={`/сategory/${id}/morePost`}>
+                    to={`/сategory/${id}/Post`}>
                       <img className={'morePostIcon'} src={morePostIcon} alt={morePostIcon}
                      onClick={() => setVisiblePost(3)}/>
                 </NavLink>
@@ -70,9 +72,8 @@ function Products({products, setProducts, setMoreProducts, setLike}: any) {
                         </div>
                     </Grid>
                 )}
-
             </Grid>
-            <button onClick={() => setPage(page + 12)} className={'btn'}>Load more...</button>
+            <button onClick={() => addMoreProducts(id , page)} className={'btn'}>Load more...</button>
         </div>
     );
 }
@@ -83,4 +84,4 @@ const productsData = (state: any) => ({
     categoriesId: state.sortBar.categories,
 })
 
-export default connect(productsData, {setProducts, setMoreProducts, setLike})(Products);
+export default connect(productsData, {setProducts, showMore, setLike})(Products);

@@ -19,7 +19,8 @@ function SortBar({category, setCategory}: any) {
             <p>Переглянути все</p>
             {category.data !== undefined && category.data.map((item: any) => <NavLink
                 className={({isActive}) => isActive ? 'active-link' : ''} key={item.id}
-                to={`/сategory/${item.id}/morePost`}>{item.name}</NavLink>)}
+                to={`/сategory/${item.id}/Post`}>{item.name}</NavLink>
+            )}
         </div>
     );
 }

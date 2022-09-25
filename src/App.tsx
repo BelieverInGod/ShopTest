@@ -14,13 +14,9 @@ function App() {
       <div className='mainPage'>
         <SortBar />
           <Routes>
-              <Route
-                  path="*"
-                  element={<Navigate to="/сategory/1/morePost" replace />}
-              />
+              <Route path="*" element={<Navigate to="/сategory/1/Post" replace />}/>
               <Route path={'/сategory/:id'} element={<Products />} />
-              <Route path={'/сategory/:id/lessPost'} element={<Products />} />
-              <Route path={'/сategory/:id/morePost'} element={<Products />} />
+              <Route path={'/сategory/:id/Post'} element={<Products />} />
           </Routes>
       </div>
       <Footer />
