@@ -24,7 +24,7 @@ function Products({products, setProducts, showMore, setLike}: any) {
         (async () => {
             const res = await shopServiceApi.getProduct(id, page).then((response: any) => {
                 response.data.map((item: any) => {
-                    item.like = true
+                    item.like = false
                 })
                 setProducts(response.data)
             });
@@ -63,9 +63,9 @@ function Products({products, setProducts, showMore, setLike}: any) {
                                 </div>
                                 <div>
                                     {
-                                        item.like ?
-                                            <img src={likeIcon} alt={'likeIcon'} onClick={() => console.log(setLike(item.id, false)) }/> :
-                                            <img src={redLike} alt={'redLike'} onClick={() => setLike(item.id, true)}/>
+                                        !item.like ?
+                                            <img src={likeIcon} alt={'likeIcon'} onClick={() => console.log(setLike(item.id, true)) }/> :
+                                            <img src={redLike} alt={'redLike'} onClick={() => setLike(item.id, false)}/>
                                     }
                                 </div>
                             </div>

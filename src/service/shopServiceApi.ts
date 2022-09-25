@@ -11,7 +11,4 @@ export const shopServiceApi = {
     getProduct(id: string | undefined, page: number | undefined):any {
         return api.get(`categories/${id}/products?offset=${page}&limit=12`)
     },
-    // getOneProduct(id: number | undefined, num: number | undefined) {
-    //     return api.get(`categories/${id}/products/${num}`)
-    // }
 }
