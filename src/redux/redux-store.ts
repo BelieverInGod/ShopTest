@@ -11,7 +11,6 @@ export type TGetState = () => TAppState;
 let reducers = combineReducers({
     sortBar: SortBarReducer,
     products: ProductsReducer,
-    like: ProductsReducer,
 })
 
 const store: TStore = createStore(reducers, applyMiddleware(thunkMiddleware));

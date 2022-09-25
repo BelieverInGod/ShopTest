@@ -26,7 +26,7 @@ function Products({products, setProducts, setMoreProducts, setLike}: any) {
                 response.data.map((item: any) => {
                     item.like = true
                 })
-                setProducts(response)
+                setProducts(response.data)
             });
         })()
     }, [id, page])
@@ -50,7 +50,7 @@ function Products({products, setProducts, setMoreProducts, setLike}: any) {
                 </NavLink>
             </div>
             <Grid container rowSpacing={2} columnSpacing={2} xs={12}>
-                {products.data !== undefined && products.data.map((item: any) => <Grid key={item.id} item
+                {products !== undefined && products.map((item: any) => <Grid key={item.id} item
                                                                                        xs={visiblePost}>
                         <div className={'productContainer'}>
                             <img src={item.images} alt={item.id} className='photo'/>
@@ -62,8 +62,8 @@ function Products({products, setProducts, setMoreProducts, setLike}: any) {
                                 <div>
                                     {
                                         item.like ?
-                                            <img src={likeIcon} alt={'likeIcon'} onClick={() => item.like = false }/> :
-                                            <img src={redLike} alt={'redLike'} onClick={() => item.like = true}/>
+                                            <img src={likeIcon} alt={'likeIcon'} onClick={() => console.log(setLike(item.id, false)) }/> :
+                                            <img src={redLike} alt={'redLike'} onClick={() => setLike(item.id, true)}/>
                                     }
                                 </div>
                             </div>

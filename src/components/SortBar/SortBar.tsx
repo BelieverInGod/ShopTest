@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
 
 function SortBar({category, setCategory}: any) {
+
     useEffect(() => {
         (async () => {
             const res = await shopServiceApi.getCategories().then((response: any) => setCategory(response));
