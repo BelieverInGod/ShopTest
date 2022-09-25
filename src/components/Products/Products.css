@@ -5,12 +5,18 @@
 }
 
 .productContainer {
+  cursor: pointer;
   border-radius: 10px;
   box-shadow: 0 0 5px rgba(0,0,0, 0.5);
   display: flex;
   flex-direction: column;
   text-align: start;
   overflow: hidden;
+  transition: all .2s ease-in-out;
+}
+
+.productContainer:hover {
+  transform: scale(1.05);
 }
 
 .priceBox {
@@ -77,17 +83,14 @@
   margin-right: 10px;
 }
 
-.lessPostIcon:hover {
-  width: 35px;
-  height: 35px
-}
-
 .morePostIcon {
   margin-right: 10px;
 }
 
-.morePostIcon:hover {
-  width: 35px;
-  height: 35px;
+.active {
+  box-shadow: 1px 1px 5px rgba(0,0,0, 0.5);
+  width: 20px;
+  margin-right: 10px;
+  height: 20px;
 }
 

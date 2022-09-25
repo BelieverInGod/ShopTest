@@ -16,9 +16,11 @@ function App() {
           <Routes>
               <Route
                   path="*"
-                  element={<Navigate to="/сategory/1" replace />}
+                  element={<Navigate to="/сategory/1/morePost" replace />}
               />
               <Route path={'/сategory/:id'} element={<Products />} />
+              <Route path={'/сategory/:id/lessPost'} element={<Products />} />
+              <Route path={'/сategory/:id/morePost'} element={<Products />} />
           </Routes>
       </div>
       <Footer />

@@ -11,6 +11,8 @@ import {useEffect, useState} from "react";
 import {shopServiceApi} from "../../service/shopServiceApi";
 import {Grid} from '@mui/material';
 import {useParams} from "react-router-dom";
+import {NavLink} from "react-router-dom";
+
 
 
 function Products({products, setProducts, setMoreProducts, setLike}: any) {
@@ -34,10 +36,18 @@ function Products({products, setProducts, setMoreProducts, setLike}: any) {
     return (
         <div className="Products">
             <div className={'visiblePost'}>
-                <img className={'lessPostIcon'} src={lessPostIcon} alt={lessPostIcon}
+            <NavLink
+                    className={({isActive}) => isActive ? 'active' : ''} key={'lessPost'}
+                    to={`/сategory/${id}/lessPost`}>
+                      <img className={'lessPostIcon'} src={lessPostIcon} alt={lessPostIcon}
                      onClick={() => setVisiblePost(6)}/>
-                <img className={'morePostIcon'} src={morePostIcon} alt={morePostIcon}
+                </NavLink>
+                <NavLink
+                    className={({isActive}) => isActive ? 'active' : ''} key={'morePost'}
+                    to={`/сategory/${id}/morePost`}>
+                      <img className={'morePostIcon'} src={morePostIcon} alt={morePostIcon}
                      onClick={() => setVisiblePost(3)}/>
+                </NavLink>
             </div>
             <Grid container rowSpacing={2} columnSpacing={2} xs={12}>
                 {products.data !== undefined && products.data.map((item: any) => <Grid key={item.id} item
@@ -62,7 +72,7 @@ function Products({products, setProducts, setMoreProducts, setLike}: any) {
                 )}
 
             </Grid>
-            <button onClick={() => setPage(page + 12)} className={'btn'}>Load mere...</button>
+            <button onClick={() => setPage(page + 12)} className={'btn'}>Load more...</button>
         </div>
     );
 }
