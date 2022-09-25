@@ -14,7 +14,6 @@ import {useParams} from "react-router-dom";
 import {NavLink} from "react-router-dom";
 
 
-
 function Products({products, setProducts, showMore, setLike}: any) {
     const [page, setPage] = useState(12)
     const [visiblePost, setVisiblePost] = useState(3)
@@ -38,22 +37,22 @@ function Products({products, setProducts, showMore, setLike}: any) {
     return (
         <div className="Products">
             <div className={'visiblePost'}>
-            <NavLink
+                <NavLink
                     className={({isActive}) => isActive ? 'active' : ''} key={'lessPost'}
                     to={`/сategory/${id}/Post`}>
-                      <img className={'lessPostIcon'} src={lessPostIcon} alt={lessPostIcon}
-                     onClick={() => setVisiblePost(6)}/>
+                    <img className={'lessPostIcon'} src={lessPostIcon} alt={lessPostIcon}
+                         onClick={() => setVisiblePost(6)}/>
                 </NavLink>
                 <NavLink
                     className={({isActive}) => isActive ? 'active' : ''} key={'morePost'}
                     to={`/сategory/${id}/Post`}>
-                      <img className={'morePostIcon'} src={morePostIcon} alt={morePostIcon}
-                     onClick={() => setVisiblePost(3)}/>
+                    <img className={'morePostIcon'} src={morePostIcon} alt={morePostIcon}
+                         onClick={() => setVisiblePost(3)}/>
                 </NavLink>
             </div>
             <Grid container rowSpacing={2} columnSpacing={2} xs={12}>
                 {products !== undefined && products.map((item: any) => <Grid key={item.id} item
-                                                                                       xs={visiblePost}>
+                                                                             xs={visiblePost}>
                         <div className={'productContainer'}>
                             <img src={item.images} alt={item.id} className='photo'/>
                             <div className={'priceBox'}>
@@ -64,7 +63,8 @@ function Products({products, setProducts, showMore, setLike}: any) {
                                 <div>
                                     {
                                         !item.like ?
-                                            <img src={likeIcon} alt={'likeIcon'} onClick={() => console.log(setLike(item.id, true)) }/> :
+                                            <img src={likeIcon} alt={'likeIcon'}
+                                                 onClick={() => console.log(setLike(item.id, true))}/> :
                                             <img src={redLike} alt={'redLike'} onClick={() => setLike(item.id, false)}/>
                                     }
                                 </div>
@@ -73,7 +73,7 @@ function Products({products, setProducts, showMore, setLike}: any) {
                     </Grid>
                 )}
             </Grid>
-            <button onClick={() => addMoreProducts(id , page)} className={'btn'}>Load more...</button>
+            <button onClick={() => addMoreProducts(id, page)} className={'btn'}>Load more...</button>
         </div>
     );
 }

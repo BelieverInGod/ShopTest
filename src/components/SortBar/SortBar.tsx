@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-
 import './SortBar.css';
 import {shopServiceApi} from "../../service/shopServiceApi";
 import {setCategory} from "../../redux/SortBarReducer";
