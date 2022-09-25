@@ -13,17 +13,23 @@ import {Grid} from '@mui/material';
 import {useParams} from "react-router-dom";
 
 
-function Products({products, setProducts, setMoreProducts, like , setLike}: any) {
+function Products({products, setProducts, setMoreProducts, setLike}: any) {
     const [page, setPage] = useState(12)
     const [visiblePost, setVisiblePost] = useState(3)
     const {id} = useParams()
 
     useEffect(() => {
         (async () => {
-            const res = await shopServiceApi.getProduct(id, page).then((response: any) => setProducts(response));
+            const res = await shopServiceApi.getProduct(id, page).then((response: any) => {
+                response.data.map((item: any) => {
+                    item.like = true
+                })
+                setProducts(response)
+            });
         })()
     }, [id, page])
 
+    console.log(products)
 
     return (
         <div className="Products">
@@ -45,9 +51,9 @@ function Products({products, setProducts, setMoreProducts, like , setLike}: any)
                                 </div>
                                 <div>
                                     {
-                                        like ?
-                                            <img src={likeIcon} alt={'likeIcon'} onClick={() => setLike(!like)}/> :
-                                            <img src={redLike} alt={'redLike'} onClick={()=> setLike(!like)} />
+                                        item.like ?
+                                            <img src={likeIcon} alt={'likeIcon'} onClick={() => item.like = false }/> :
+                                            <img src={redLike} alt={'redLike'} onClick={() => item.like = true}/>
                                     }
                                 </div>
                             </div>

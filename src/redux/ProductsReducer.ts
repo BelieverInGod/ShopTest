@@ -5,9 +5,7 @@ const SET_MORE_PRODUCT = 'SET_MORE_PRODUCT';
 const SET_LIKE = 'SET_LIKE';
 
 const initialState = {
-    products: [
-        {like: true}
-    ],
+    products: [],
 }
 
 const ProductsReducer = (state = initialState, action: AnyAction) => {
@@ -17,7 +15,7 @@ const ProductsReducer = (state = initialState, action: AnyAction) => {
         case SET_MORE_PRODUCT:
             return {...state, products: [...state.products, action.products]}
         case SET_LIKE:
-            return {...state, like: action.like}
+            return {...state, products: [...state.products, action.like]}
         default:
             return state
     }
