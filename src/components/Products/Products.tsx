@@ -66,7 +66,7 @@ function Products({products, setProducts, setMoreProducts, like , setLike}: any)
                 )}
 
             </Grid>
-            <button onClick={() => setPage(page + 12)} className={'btn'}>Load mere...</button>
+            <button onClick={() => setPage(page + 12)} className={'btn'}>Load more...</button>
         </div>
     );
 }
