@@ -7,6 +7,10 @@ app.use(express.static('build'))
 
 router.post('/')
 
+app.get('/*', function(req,res) {
+    res.sendFile(__dirname + '/build/index.html')
+});
+
 app.listen(port, () => {
     console.log('Server is up!');
 });
