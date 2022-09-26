@@ -9,7 +9,6 @@ function SortBar({category, setCategory, setPage}: any) {
 
     useEffect(() => {
         (async () => {
-            await setPage(12)
             const res = await shopServiceApi.getCategories().then((response: any) => setCategory(response));
         })()
     }, [])
@@ -17,7 +16,7 @@ function SortBar({category, setCategory, setPage}: any) {
     return (
         <div className="SortBar">
             <p>Переглянути все</p>
-            {category.data !== undefined && category.data.map((item: any) => <NavLink
+            {category.data !== undefined && category.data.map((item: any) => <NavLink onClick={() => setPage(12)}
                 className={({isActive}) => isActive ? 'active-link' : ''} key={item.id}
                 to={`/сategory/${item.id}/Post`}>{item.name}</NavLink>
             )}
