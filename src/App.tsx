@@ -16,7 +16,7 @@ function App() {
           <Routes>
               <Route path="*" element={<Navigate to="/category/1/Post" replace />}/>
               <Route path={'/category/:id'} element={<Products />} />
-              <Route path={'/category/:id/Post'} element={<Products />} />
+              <Route path={'/сategory/:id/Post'} element={<Products />} />
           </Routes>
       </div>
       <Footer />
