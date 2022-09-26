@@ -14,8 +14,8 @@ function App() {
       <div className='mainPage'>
         <SortBar />
           <Routes>
-              <Route path="*" element={<Navigate to="/category/1/Post" replace />}/>
-              <Route path={'/category/:id'} element={<Products />} />
+              <Route path="*" element={<Navigate to="/сategory/1/Post" replace />}/>
+              <Route path={'/сategory/:id'} element={<Products />} />
               <Route path={'/сategory/:id/Post'} element={<Products />} />
           </Routes>
       </div>
