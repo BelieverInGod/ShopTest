@@ -5,10 +5,11 @@ import {setCategory} from "../../redux/SortBarReducer";
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
 
-function SortBar({category, setCategory}: any) {
+function SortBar({category, setCategory, setPage}: any) {
 
     useEffect(() => {
         (async () => {
+            await setPage(12)
             const res = await shopServiceApi.getCategories().then((response: any) => setCategory(response));
         })()
     }, [])

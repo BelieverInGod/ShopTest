@@ -9,6 +9,6 @@ export const shopServiceApi = {
         return api.get('categories/')
     },
     getProduct(id: string | undefined, page: number | undefined):any {
-        return api.get(`categories/${id}/products?offset=${page}&limit=12`)
+        return api.get(`categories/${id}/products?offset=0&limit=${page}`)
     },
 }

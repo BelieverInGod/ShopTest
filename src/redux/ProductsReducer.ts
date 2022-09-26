@@ -1,5 +1,4 @@
 import {AnyAction, Dispatch} from "redux";
-import {shopServiceApi} from "../service/shopServiceApi";
 
 const SET_PRODUCTS = 'SET_PRODUCTS';
 const SET_MORE_PRODUCT = 'SET_MORE_PRODUCT';
@@ -41,13 +40,5 @@ const ProductsReducer = (state = initialState, action: AnyAction) => {
 export const setLike = (id: any, like:boolean) => ({type: SET_LIKE, id, like})
 export const setProducts = (products: {}) => ({type: SET_PRODUCTS, products})
 export const setMoreProducts = (products: {}) => ({type: SET_MORE_PRODUCT, products})
-
-export const showMore = (id: string, page: number) => {
-    return async (dispatch: Dispatch<AnyAction>) => {
-        const res = await shopServiceApi.getProduct(id, page).then((response: any) => response.data);
-        dispatch(setMoreProducts(res))
-    }
-}
-
 
 export default ProductsReducer

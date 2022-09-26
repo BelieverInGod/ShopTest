@@ -6,7 +6,7 @@ import lessPostIcon from '../../assets/image/lessPost.png'
 
 import * as React from 'react';
 import {connect} from "react-redux";
-import {setLike, setMoreProducts, setProducts, showMore} from "../../redux/ProductsReducer";
+import {setLike, setMoreProducts, setProducts} from "../../redux/ProductsReducer";
 import {useEffect, useState} from "react";
 import {shopServiceApi} from "../../service/shopServiceApi";
 import {Grid} from '@mui/material';
@@ -14,7 +14,7 @@ import {useParams} from "react-router-dom";
 import {NavLink} from "react-router-dom";
 
 
-function Products({products, setProducts, showMore, setLike, page, setPage}: any) {
+function Products({products, setProducts, setLike, page, setPage}: any) {
     const [visiblePost, setVisiblePost] = useState(3)
     const {id} = useParams()
 
@@ -28,10 +28,6 @@ function Products({products, setProducts, showMore, setLike, page, setPage}: any
             });
         })()
     }, [id, page])
-
-    const addMoreProducts = (id: string | undefined, page: number) => {
-        showMore(id, page).then(() => setPage(page + 12))
-    }
 
     return (
         <div className="Products">
@@ -72,7 +68,7 @@ function Products({products, setProducts, showMore, setLike, page, setPage}: any
                     </Grid>
                 )}
             </Grid>
-            <button onClick={() => addMoreProducts(id, page)} className={'btn'}>Load more...</button>
+            <button onClick={() => setPage(page + 12)} className={'btn'}>Load more...</button>
         </div>
     );
 }
@@ -83,4 +79,4 @@ const productsData = (state: any) => ({
     categoriesId: state.sortBar.categories,
 })
 
-export default connect(productsData, {setProducts, showMore, setLike})(Products);
+export default connect(productsData, {setProducts, setLike})(Products);
