@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 
 import Header from './components/Header/Header'
@@ -8,15 +8,17 @@ import Footer from './components/Footer/Footer'
 import {Navigate, Route, Routes} from "react-router-dom";
 
 function App() {
-  return (
+    const [page, setPage] = useState(12)
+
+    return (
     <div className="App">
       <Header />
       <div className='mainPage'>
-        <SortBar />
+        <SortBar page={page} setPage={setPage} />
           <Routes>
-              <Route path="*" element={<Navigate to="/сategory/1/Post" replace />}/>
-              <Route path={'/сategory/:id'} element={<Products />} />
-              <Route path={'/сategory/:id/Post'} element={<Products />} />
+              <Route path="/" element={<Navigate to="/сategory/1/Post" />}/>
+              <Route path={'/сategory/:id'} element={<Products page={page} setPage={setPage} />} />
+              <Route path={'/сategory/:id/Post'} element={<Products page={page} setPage={setPage} />} />
           </Routes>
       </div>
       <Footer />

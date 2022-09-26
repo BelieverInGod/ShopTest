@@ -39,8 +39,8 @@ const ProductsReducer = (state = initialState, action: AnyAction) => {
 }
 
 export const setLike = (id: any, like:boolean) => ({type: SET_LIKE, id, like})
-export const setProducts = (products: any) => ({type: SET_PRODUCTS, products})
-export const setMoreProducts = (products: any) => ({type: SET_MORE_PRODUCT, products})
+export const setProducts = (products: {}) => ({type: SET_PRODUCTS, products})
+export const setMoreProducts = (products: {}) => ({type: SET_MORE_PRODUCT, products})
 
 export const showMore = (id: string, page: number) => {
     return async (dispatch: Dispatch<AnyAction>) => {

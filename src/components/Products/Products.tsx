@@ -14,8 +14,7 @@ import {useParams} from "react-router-dom";
 import {NavLink} from "react-router-dom";
 
 
-function Products({products, setProducts, showMore, setLike}: any) {
-    const [page, setPage] = useState(12)
+function Products({products, setProducts, showMore, setLike, page, setPage}: any) {
     const [visiblePost, setVisiblePost] = useState(3)
     const {id} = useParams()
 
@@ -28,7 +27,7 @@ function Products({products, setProducts, showMore, setLike}: any) {
                 setProducts(response.data)
             });
         })()
-    }, [id])
+    }, [id, page])
 
     const addMoreProducts = (id: string | undefined, page: number) => {
         showMore(id, page).then(() => setPage(page + 12))

@@ -1,10 +1,12 @@
 const express = require('express');
-const {useParams} = require("react-router-dom");
+const path = require('path');
 const app = express();
-app.use(express.static('build'));
+const router = express.Router()
+const port = process.env.PORT || 8080;
+app.use(express.static('build'))
 
-app.get(`/category/1/Post`, function(req,res) {
-    res.sendFile(__dirname + '/build/index.html')
+router.post('/')
+
+app.listen(port, () => {
+    console.log('Server is up!');
 });
-
-app.listen(process.env.PORT || 8080);
